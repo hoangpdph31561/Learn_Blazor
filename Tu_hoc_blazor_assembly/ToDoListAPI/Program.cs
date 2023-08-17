@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoListAPI.Data;
+using ToDoListAPI.Respository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,7 @@ builder.Services.AddDbContext<ToDoListDBContext>(option =>
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddScoped<ITaskRespository,TaskRespository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

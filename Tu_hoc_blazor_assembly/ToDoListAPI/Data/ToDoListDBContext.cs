@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ToDoListAPI.Entities;
 
@@ -11,5 +12,6 @@ namespace ToDoListAPI.Data
             
         }
         public DbSet<ToDoListAPI.Entities.Task> Tasks { get; set; }
+       
     }
 }

@@ -2,6 +2,7 @@
 {
     public enum Status
     {
+        Open,
         New,
         Inprogress,
         Resolved,
