@@ -1,18 +1,26 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using ToDoList_ViewModel.Enums;
 
-
-namespace ToDoListAPI.Entities
+namespace ToDoList_ViewModel
 {
-    public class Task
+    public class TaskToDoListViewModel
     {
         public Guid Id { get; set; }
+
         public string Name { get; set; }
+
         public Guid? AssigneeId { get; set; }
-        [ForeignKey(nameof(AssigneeId))]
-        public User Assignee { get; set; }
+
+        public string AssigneeName { set; get; }
+
         public DateTime CreatedDate { get; set; }
+
         public Priority Priority { get; set; }
+
         public Status Status { get; set; }
     }
 }

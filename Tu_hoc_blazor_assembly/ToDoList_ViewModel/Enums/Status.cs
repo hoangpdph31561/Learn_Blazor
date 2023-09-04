@@ -1,4 +1,4 @@
-﻿namespace ToDoListAPI.Enums
+﻿namespace ToDoList_ViewModel.Enums
 {
     public enum Status
     {

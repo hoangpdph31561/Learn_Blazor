@@ -1,4 +1,5 @@
-﻿using ToDoListAPI.Enums;
+﻿using ToDoList_ViewModel.Enums;
+
 
 namespace ToDoListAPI.Model
 {

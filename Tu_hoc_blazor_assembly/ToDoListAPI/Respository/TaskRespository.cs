@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using ToDoList_ViewModel;
 using ToDoListAPI.Data;
 using ToDoListAPI.Model;
 
@@ -35,9 +36,18 @@ namespace ToDoListAPI.Respository
             _dbContext.SaveChanges();
         }
 
-        public List<Entities.Task> GetAllTask()
+        public List<TaskToDoListViewModel> GetAllTask()
         {
-            return _dbContext.Tasks.ToList();
+            return _dbContext.Tasks.Select(x => new TaskToDoListViewModel()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Priority = x.Priority,
+                Status = x.Status,
+                AssigneeId = x.AssigneeId,
+                CreatedDate = x.CreatedDate,
+                AssigneeName = x.Assignee.FirstName + " " + x.Assignee.LastName,
+            }).ToList();
         }
 
         public Entities.Task GetTaskByID(Guid Id)

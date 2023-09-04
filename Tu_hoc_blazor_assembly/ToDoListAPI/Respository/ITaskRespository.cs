@@ -1,11 +1,12 @@
-﻿using ToDoListAPI.Entities;
+﻿using ToDoList_ViewModel;
+using ToDoListAPI.Entities;
 using ToDoListAPI.Model;
 
 namespace ToDoListAPI.Respository
 {
     public interface ITaskRespository
     {
-        List<ToDoListAPI.Entities.Task> GetAllTask();
+        List<TaskToDoListViewModel> GetAllTask();
         ToDoListAPI.Entities.Task GetTaskByID(Guid Id);
         ToDoListAPI.Entities.Task CreateNewTask(TaskModel task);
         void Update(Guid Id, TaskModel task);
