@@ -1,0 +1,23 @@
+﻿@page "/createtask"
+@using ToDoList_ViewModel.Enums
+<h3>Create new task</h3>
+
+<EditForm Model="@CreateRequest">
+    <div class="mb-3">
+        <label for="createName" class="form-label">Name</label>
+        <InputText class="form-control" id="createName" placeholher="Input your name here" @bind-Value="@CreateRequest.Name"></InputText>
+        
+    </div>
+    <div class="mb-3">
+        <label for="createPriority" class="form-label">Priority</label>
+        <InputSelect @bind-Value="@CreateRequest.Priority" class="form-control" id="createPriority">
+            <option>--Select your priority--</option>
+            @foreach (var item in Enum.GetValues(typeof(Priority)))
+            {
+                <option value="@item">@item</option>
+            }
+        </InputSelect>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
