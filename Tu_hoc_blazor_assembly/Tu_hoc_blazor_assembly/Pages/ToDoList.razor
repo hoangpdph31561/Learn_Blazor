@@ -5,27 +5,27 @@
 <p>Xin chào tới Blazor đầu tiên</p>
 @if(Tasks == null || Tasks.Count == 0)
 {
-    <p>Loading...</p>
+    <div class="spinner"></div>
 }
 else {
 <table class="table">
     <thead>
         <tr>
-            <td>
+            <th>
                 Name
-            </td>
-            <td>
+            </th>
+            <th>
                 Priority
-            </td>
-            <td>
+            </th>
+            <th>
                 Assignee
-            </td>
-            <td>
+            </th>
+            <th>
                 Date
-            </td>
-            <td>
+            </th>
+            <th>
                 Status
-            </td>
+            </th>
         </tr>
     </thead>
     <tbody>
