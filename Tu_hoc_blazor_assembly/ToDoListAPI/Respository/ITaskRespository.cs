@@ -6,10 +6,10 @@ namespace ToDoListAPI.Respository
 {
     public interface ITaskRespository
     {
-        List<TaskToDoListViewModel> GetAllTask();
-        ToDoListAPI.Entities.Task GetTaskByID(Guid Id);
-        ToDoListAPI.Entities.Task CreateNewTask(TaskModel task);
-        void Update(Guid Id, TaskModel task);
-        void Delete(Guid Id);
+        Task<List<TaskToDoListViewModel>> GetAllTask();
+        Task<ToDoListAPI.Entities.TaskCV> GetTaskByID(Guid Id);
+        Task<ToDoListAPI.Entities.TaskCV> CreateNewTask(TaskModel task);
+        Task Update(Guid Id, TaskModel task);
+        Task Delete(Guid Id);
     }
 }

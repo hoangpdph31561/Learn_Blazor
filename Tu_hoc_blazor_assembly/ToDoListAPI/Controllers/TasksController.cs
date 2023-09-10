@@ -8,25 +8,25 @@ namespace ToDoListAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TaskController : ControllerBase
+    public class TasksController : ControllerBase
     {
         private readonly ITaskRespository _taskRespository;
-        public TaskController(ITaskRespository taskRespository)
+        public TasksController(ITaskRespository taskRespository)
         {
             _taskRespository = taskRespository;
         }
         [HttpGet]
-        public IActionResult GetAllTask()
+        public async Task<IActionResult> GetAllTask()
         {
-            var result = _taskRespository.GetAllTask();
+            var result = await _taskRespository.GetAllTask();
             return Ok(result);
         }
         [HttpGet("{id}")]
-        public IActionResult GetByIDTask(Guid id)
+        public async Task<IActionResult> GetByIDTask(Guid id)
         {
             try
             {
-                var result = _taskRespository.GetTaskByID(id);
+                var result = await _taskRespository.GetTaskByID(id);
                 if(result == null)
                 {
                     return NotFound();
@@ -40,11 +40,11 @@ namespace ToDoListAPI.Controllers
             }
         }
         [HttpPost]
-        public IActionResult CreateNewTask(TaskCreateRequest request)
+        public async Task<IActionResult> CreateNewTask(TaskCreateRequest request)
         {
             try
             {
-                var task = _taskRespository.CreateNewTask(new TaskModel()
+                var task = await _taskRespository.CreateNewTask(new TaskModel()
                 {
                     Name = request.Name,
                     Priority = (ToDoList_ViewModel.Enums.Priority) request.Priority,
@@ -61,11 +61,11 @@ namespace ToDoListAPI.Controllers
             }
         }
         [HttpPut("{id}")]
-        public IActionResult UpdateTask(Guid id, [FromForm]TaskModel task)
+        public async Task<IActionResult> UpdateTask(Guid id, [FromForm]TaskModel task)
         {
             try
             {
-                var result = _taskRespository.GetTaskByID(id);
+                var result = await _taskRespository.GetTaskByID(id);
                 if(result == null )
                 {
                     return NotFound();
@@ -80,11 +80,11 @@ namespace ToDoListAPI.Controllers
             }
         }
         [HttpDelete("{id}")]
-        public IActionResult DeleteTask(Guid id)
+        public async Task<IActionResult> DeleteTask(Guid id)
         {
             try
             {
-                var result = _taskRespository.GetTaskByID(id);
+                var result = await _taskRespository.GetTaskByID(id);
                 if(result == null)
                 {
                     return NotFound();

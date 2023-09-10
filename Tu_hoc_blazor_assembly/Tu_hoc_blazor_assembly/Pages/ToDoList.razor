@@ -2,8 +2,46 @@
 
 <PageTitle>ToDoList</PageTitle>
 <h3>ToDoList</h3>
-<p>Xin chào @name tới Blazor đầu tiên</p>
-
-@code {
-    string name = "Phạm Đức Hoàng";
+<p>Xin chào tới Blazor đầu tiên</p>
+@if(Tasks == null || Tasks.Count == 0)
+{
+    <p>Loading...</p>
 }
+else {
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                Name
+            </td>
+            <td>
+                Priority
+            </td>
+            <td>
+                Assignee
+            </td>
+            <td>
+                Date
+            </td>
+            <td>
+                Status
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Tasks)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>@item.Priority</td>
+                <td>@item.AssigneeName</td>
+                <td>@item.CreatedDate.ToString("dd/MM/yyyy hh:mm")</td>
+                <td>@item.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+

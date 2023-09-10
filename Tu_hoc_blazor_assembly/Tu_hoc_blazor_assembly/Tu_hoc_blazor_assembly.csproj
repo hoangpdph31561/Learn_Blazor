@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.19" PrivateAssets="all" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ToDoList_ViewModel\ToDoList_ViewModel.csproj" />
+  </ItemGroup>
+
 </Project>

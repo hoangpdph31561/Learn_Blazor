@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Data;
 using ToDoList_ViewModel;
 using ToDoListAPI.Data;
 using ToDoListAPI.Model;
@@ -12,10 +13,10 @@ namespace ToDoListAPI.Respository
         {
             _dbContext = dbContext;
         }
-        public Entities.Task CreateNewTask(TaskModel task)
+        public async Task<Entities.TaskCV> CreateNewTask(TaskModel task)
         {
             string idUser = "568f6cb7-3cb8-45d3-ae5b-64e41c22db9f";
-            var newTask = new Entities.Task
+            var newTask = new Entities.TaskCV
             {
                 Id = Guid.NewGuid(),
                 CreatedDate = DateTime.Now,
@@ -25,20 +26,20 @@ namespace ToDoListAPI.Respository
                 AssigneeId = Guid.Parse(idUser),
             };
             _dbContext.Tasks.Add(newTask);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
             return newTask;
         }
 
-        public void Delete(Guid Id)
+        public async Task Delete(Guid Id)
         {
-            var result = _dbContext.Tasks.FirstOrDefault(x => x.Id == Id);
-            _dbContext.Tasks.Remove(result);
-            _dbContext.SaveChanges();
+            var result = await _dbContext.Tasks.FirstOrDefaultAsync(x => x.Id == Id);
+             _dbContext.Tasks.Remove(result);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public List<TaskToDoListViewModel> GetAllTask()
+        public async Task<List<TaskToDoListViewModel>> GetAllTask()
         {
-            return _dbContext.Tasks.Select(x => new TaskToDoListViewModel()
+            return await _dbContext.Tasks.Select(x => new TaskToDoListViewModel()
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -47,24 +48,24 @@ namespace ToDoListAPI.Respository
                 AssigneeId = x.AssigneeId,
                 CreatedDate = x.CreatedDate,
                 AssigneeName = x.Assignee.FirstName + " " + x.Assignee.LastName,
-            }).ToList();
+            }).ToListAsync();
         }
 
-        public Entities.Task GetTaskByID(Guid Id)
+        public async Task<Entities.TaskCV> GetTaskByID(Guid Id)
         {
-            var result = _dbContext.Tasks.FirstOrDefault(x => x.Id == Id);
+            var result =await _dbContext.Tasks.FirstOrDefaultAsync(x => x.Id == Id);
             return result;
         }
 
-        public void Update(Guid Id, TaskModel task)
+        public async Task Update(Guid Id, TaskModel task)
         {
-            var result = _dbContext.Tasks.FirstOrDefault(x => x.Id == Id);
+            var result = await _dbContext.Tasks.FirstOrDefaultAsync(x => x.Id == Id);
             result.Name = task.Name;
             result.Status = task.Status;
             result.Priority = task.Priority;
             result.CreatedDate = task.CreatedDate;
             _dbContext.Tasks.Update(result);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

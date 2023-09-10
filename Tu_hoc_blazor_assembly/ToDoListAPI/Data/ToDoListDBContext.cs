@@ -11,7 +11,7 @@ namespace ToDoListAPI.Data
         {
             
         }
-        public DbSet<ToDoListAPI.Entities.Task> Tasks { get; set; }
+        public DbSet<ToDoListAPI.Entities.TaskCV> Tasks { get; set; }
        
     }
 }

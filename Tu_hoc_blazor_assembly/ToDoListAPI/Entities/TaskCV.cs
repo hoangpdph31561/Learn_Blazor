@@ -4,7 +4,7 @@ using ToDoList_ViewModel.Enums;
 
 namespace ToDoListAPI.Entities
 {
-    public class Task
+    public class TaskCV
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
