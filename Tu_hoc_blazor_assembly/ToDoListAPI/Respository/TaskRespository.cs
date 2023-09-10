@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Data;
 using ToDoList_ViewModel;
+using ToDoList_ViewModel.Enums;
 using ToDoListAPI.Data;
 using ToDoListAPI.Model;
 
@@ -13,16 +14,16 @@ namespace ToDoListAPI.Respository
         {
             _dbContext = dbContext;
         }
-        public async Task<Entities.TaskCV> CreateNewTask(TaskModel task)
+        public async Task<Entities.TaskCV> CreateNewTask(TaskModel request)
         {
             string idUser = "568f6cb7-3cb8-45d3-ae5b-64e41c22db9f";
             var newTask = new Entities.TaskCV
             {
                 Id = Guid.NewGuid(),
                 CreatedDate = DateTime.Now,
-                Name = task.Name,
-                Priority = task.Priority,
-                Status = task.Status,
+                Name = request.Name,
+                Priority = request.Priority,
+                Status = Status.New,
                 AssigneeId = Guid.Parse(idUser),
             };
             _dbContext.Tasks.Add(newTask);

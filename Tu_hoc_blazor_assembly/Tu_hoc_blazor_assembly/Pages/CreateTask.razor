@@ -3,10 +3,12 @@
 <h3>Create new task</h3>
 
 <EditForm Model="@CreateRequest">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
     <div class="mb-3">
         <label for="createName" class="form-label">Name</label>
         <InputText class="form-control" id="createName" placeholher="Input your name here" @bind-Value="@CreateRequest.Name"></InputText>
-        
+        <ValidationMessage For="() => CreateRequest.Name"></ValidationMessage>
     </div>
     <div class="mb-3">
         <label for="createPriority" class="form-label">Priority</label>
@@ -17,7 +19,7 @@
                 <option value="@item">@item</option>
             }
         </InputSelect>
-
+        <ValidationMessage For="() => CreateRequest.Priority"></ValidationMessage>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </EditForm>
