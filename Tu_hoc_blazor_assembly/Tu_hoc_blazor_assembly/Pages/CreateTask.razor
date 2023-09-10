@@ -2,7 +2,7 @@
 @using ToDoList_ViewModel.Enums
 <h3>Create new task</h3>
 
-<EditForm Model="@CreateRequest">
+<EditForm Model="@CreateRequest" OnValidSubmit="CreateNewTask">
     <DataAnnotationsValidator/>
     <ValidationSummary/>
     <div class="mb-3">

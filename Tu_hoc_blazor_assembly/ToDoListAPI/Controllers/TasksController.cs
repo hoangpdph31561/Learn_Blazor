@@ -40,7 +40,7 @@ namespace ToDoListAPI.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> CreateNewTask(TaskCreateRequest request)
+        public async Task<IActionResult> CreateNewTask([FromBody]TaskCreateRequest request)
         {
             try
             {

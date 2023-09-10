@@ -10,10 +10,10 @@ namespace ToDoList_ViewModel
 {
     public class TaskCreateRequest
     {
-        [MaxLength(20)]
-        [Required]
+        [MaxLength(20,ErrorMessage = "You cannot fill more than 20 charecters")]
+        [Required(ErrorMessage ="You must enter your task name")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please select your task priority")]
         public Priority? Priority { get; set; }
     }
 }

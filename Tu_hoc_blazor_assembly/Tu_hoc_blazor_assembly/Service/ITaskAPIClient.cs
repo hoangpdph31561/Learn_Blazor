@@ -7,5 +7,6 @@ namespace Tu_hoc_blazor_assembly.Service
     {
         Task<List<TaskToDoListViewModel>> GetTaskList(TaskListSearchRequest request);
         Task<TaskToDoListViewModel> GetTaskById(string TaskId);
+        Task<bool> CreateTask(TaskCreateRequest request);
     }
 }
