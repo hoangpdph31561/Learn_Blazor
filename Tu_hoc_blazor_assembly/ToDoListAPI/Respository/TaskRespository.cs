@@ -51,10 +51,27 @@ namespace ToDoListAPI.Respository
             }).ToListAsync();
         }
 
-        public async Task<Entities.TaskCV> GetTaskByID(Guid Id)
+        public async Task<TaskToDoListViewModel> GetTaskByID(Guid Id)
         {
-            var result =await _dbContext.Tasks.FirstOrDefaultAsync(x => x.Id == Id);
-            return result;
+            var result =await _dbContext.Tasks.Include(x => x.Assignee).FirstOrDefaultAsync(x => x.Id == Id);
+            if(result == null)
+            {
+                return null;
+            }
+            else
+            {
+                var finalResult = new TaskToDoListViewModel()
+                {
+                    Id = result.Id,
+                    Name = result.Name,
+                    Priority = result.Priority,
+                    Status = result.Status,
+                    AssigneeId = result.AssigneeId,
+                    CreatedDate = result.CreatedDate,
+                    AssigneeName = result.Assignee.FirstName + " " + result.Assignee.LastName,
+                };
+                return finalResult;
+            }
         }
 
         public async Task Update(Guid Id, TaskModel task)

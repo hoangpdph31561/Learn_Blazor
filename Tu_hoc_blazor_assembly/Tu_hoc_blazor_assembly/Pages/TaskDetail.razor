@@ -1,4 +1,35 @@
 ﻿@page "/taskdetail/{TaskId}"
 <h3>TaskDetail @TaskId</h3>
 
+@if (TaskViewModel == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <h4>@TaskViewModel.Name</h4>
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <td>@TaskViewModel.Name</td>
+        </tr>
+        <tr>
+            <td>Assignee</td>
+            <td>@TaskViewModel.AssigneeName</td>
+        </tr>
+        <tr>
+            <td>Date</td>
+            <td>@TaskViewModel.CreatedDate.ToString("dd/MM/yyyy")</td>
+        </tr>
+        <tr>
+            <td>Priority</td>
+            <td>@TaskViewModel.Priority</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>@TaskViewModel.Status</td>
+        </tr>
+    </table>
+}
+
 

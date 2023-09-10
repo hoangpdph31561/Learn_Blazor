@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
+using ToDoList_ViewModel;
+using Tu_hoc_blazor_assembly.Service;
 
 namespace Tu_hoc_blazor_assembly.Pages
 {
@@ -6,6 +8,12 @@ namespace Tu_hoc_blazor_assembly.Pages
     {
         [Parameter]
         public string TaskId { get; set; }
-
+        [Inject]
+        public ITaskAPIClient TaskAPIClient { get; set; }
+        public TaskToDoListViewModel TaskViewModel { get; set; } = new TaskToDoListViewModel();
+        protected async override Task OnInitializedAsync()
+        {
+            TaskViewModel = await TaskAPIClient.GetTaskById(TaskId);
+        }
     }
 }
