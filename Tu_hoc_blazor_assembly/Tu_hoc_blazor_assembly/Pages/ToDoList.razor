@@ -1,49 +1,82 @@
 ﻿@page "/todolist"
-
+@using ToDoList_ViewModel.Enums
 <PageTitle>ToDoList</PageTitle>
 <h3>ToDoList</h3>
 <p>Xin chào tới Blazor đầu tiên</p>
-@if(Tasks == null || Tasks.Count == 0)
+@if(Tasks == null || Tasks.Count == 0 || Users == null)
 {
     <div class="spinner"></div>
 }
 else {
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Priority
-            </th>
-            <th>
-                Assignee
-            </th>
-            <th>
-                Date
-            </th>
-            <th>
-                Status
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Tasks)
-        {
-            <tr>
-                <td>
-                    @item.Name
-                </td>
-                <td>@item.Priority</td>
-                <td>@item.AssigneeName</td>
-                <td>@item.CreatedDate.ToString("dd/MM/yyyy hh:mm")</td>
-                <td>@item.Status</td>
-                <td><a href="/taskdetail/@item.Id" class="btn btn-primary m-1">Detail</a></td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="row">
+        <EditForm Model="@TaskListSearch">
+            <div class="col">
+                <label for="SearchName">Name</label>
+                <InputText id="SearchName" class="form-control" @bind-Value="TaskListSearch.Name"></InputText>
+            </div>
+            <div class="col">
+                <label for="Assignee">Assignee Name</label>
+                <InputSelect id="Assignee" @bind-Value="TaskListSearch.AssigneeId" class="form-control">
+                    @foreach (var item in Users)
+                {
+                    <option value="@item.UserId">@item.Name</option>
+                }
+                </InputSelect>
+            </div>
+            <div class="col">
+                <label for="PriorityName">Priority</label>
+                <InputSelect id="PriorityName" class="form-control" @bind-Value="TaskListSearch.Priority">
+                    @foreach (var item in Enum.GetNames(typeof(Priority)))
+                {
+                    <option value="@item">@item</option>
+                }
+                </InputSelect>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-success">Search</button>
+            </div>
+        </EditForm>
+    </div>
+
+<div class="row mt-4">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Priority
+                    </th>
+                    <th>
+                        Assignee
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Tasks)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>@item.Priority</td>
+                        <td>@item.AssigneeName</td>
+                        <td>@item.CreatedDate.ToString("dd/MM/yyyy hh:mm")</td>
+                        <td>@item.Status</td>
+                        <td><a href="/taskdetail/@item.Id" class="btn btn-primary m-1">Detail</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>
+
 }
 
