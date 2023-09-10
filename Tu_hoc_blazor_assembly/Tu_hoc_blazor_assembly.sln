@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tu_hoc_blazor_assembly", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListAPI", "ToDoListAPI\ToDoListAPI.csproj", "{87771AD8-B0B9-4DCE-B5EB-47D8FB21E5F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList_ViewModel", "ToDoList_ViewModel\ToDoList_ViewModel.csproj", "{5155E425-B0F0-431D-BC62-96A17E014F04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList_ViewModel", "ToDoList_ViewModel\ToDoList_ViewModel.csproj", "{5155E425-B0F0-431D-BC62-96A17E014F04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
