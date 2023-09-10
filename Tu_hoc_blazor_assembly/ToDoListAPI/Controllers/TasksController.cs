@@ -16,9 +16,9 @@ namespace ToDoListAPI.Controllers
             _taskRespository = taskRespository;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllTask()
+        public async Task<IActionResult> GetAllTask([FromQuery]TaskListSearchRequest request)
         {
-            var result = await _taskRespository.GetAllTask();
+            var result = await _taskRespository.GetAllTask( request);
             return Ok(result);
         }
         [HttpGet("{id}")]

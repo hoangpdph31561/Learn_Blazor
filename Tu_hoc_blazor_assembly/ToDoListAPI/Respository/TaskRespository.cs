@@ -37,17 +37,31 @@ namespace ToDoListAPI.Respository
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<TaskToDoListViewModel>> GetAllTask()
+        public async Task<List<TaskToDoListViewModel>> GetAllTask(TaskListSearchRequest request)
         {
-            return await _dbContext.Tasks.Select(x => new TaskToDoListViewModel()
+            var querry = _dbContext.Tasks.Include(x => x.Assignee).AsQueryable();
+            if (!string.IsNullOrEmpty(request.Name))
+            {
+                querry = querry.Where(x => x.Name.ToLower().Contains(request.Name.ToLower()));
+            }
+            if(request.AssigneeId.HasValue)
+            {
+                querry = querry.Where(x => x.Assignee.Id == request.AssigneeId.Value);
+            }
+            if(request.Priority.HasValue)
+            {
+                querry = querry.Where(x => x.Priority == request.Priority.Value);
+
+            }
+            return await querry.Select(x => new TaskToDoListViewModel
             {
                 Id = x.Id,
                 Name = x.Name,
-                Priority = x.Priority,
-                Status = x.Status,
                 AssigneeId = x.AssigneeId,
-                CreatedDate = x.CreatedDate,
+                Priority = x.Priority,
                 AssigneeName = x.Assignee.FirstName + " " + x.Assignee.LastName,
+                CreatedDate = x.CreatedDate,
+                Status = x.Status,
             }).ToListAsync();
         }
 

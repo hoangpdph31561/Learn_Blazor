@@ -5,7 +5,7 @@ namespace Tu_hoc_blazor_assembly.Service
 {
     public interface ITaskAPIClient
     {
-        Task<List<TaskToDoListViewModel>> GetTaskList();
+        Task<List<TaskToDoListViewModel>> GetTaskList(TaskListSearchRequest request);
         Task<TaskToDoListViewModel> GetTaskById(string TaskId);
     }
 }

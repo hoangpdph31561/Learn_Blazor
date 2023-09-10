@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using ToDoList_ViewModel;
 using ToDoList_ViewModel.Enums;
 using Tu_hoc_blazor_assembly.Service;
@@ -13,17 +14,16 @@ namespace Tu_hoc_blazor_assembly.Pages
         [Inject] private ITaskAPIClient _taskAPIClient { get; set; }
         private List<TaskToDoListViewModel> Tasks = new List<TaskToDoListViewModel>();
         private List<UserViewModel> Users = new List<UserViewModel>();
-        private TaskListSearch TaskListSearch { get; set; } = new TaskListSearch();
+        private TaskListSearchRequest TaskListSearch { get; set; } = new TaskListSearchRequest();
         protected async override Task OnInitializedAsync()
         {
-            Tasks = await _taskAPIClient.GetTaskList();
+            Tasks = await _taskAPIClient.GetTaskList(TaskListSearch);
             Users = await _userAPIClient.GetAllUser();
         }
+        private async Task SearchForm(EditContext context)
+        {
+            Tasks = await _taskAPIClient.GetTaskList(TaskListSearch);
+        }
     }
-    public class TaskListSearch
-    {
-        public string Name { get; set; }
-        public Guid AssigneeId { get; set; }
-        public Priority  Priority { get; set; }
-    }
+    
 }

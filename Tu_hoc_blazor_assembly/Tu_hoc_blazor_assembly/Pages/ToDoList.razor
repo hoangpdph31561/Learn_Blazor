@@ -9,7 +9,7 @@
 }
 else {
     <div class="row">
-        <EditForm Model="@TaskListSearch">
+        <EditForm Model="@TaskListSearch" OnSubmit="SearchForm">
             <div class="col">
                 <label for="SearchName">Name</label>
                 <InputText id="SearchName" class="form-control" @bind-Value="TaskListSearch.Name"></InputText>

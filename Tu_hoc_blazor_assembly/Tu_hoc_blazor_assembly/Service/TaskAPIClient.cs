@@ -17,9 +17,10 @@ namespace Tu_hoc_blazor_assembly.Service
             return result;
         }
 
-        public async Task<List<TaskToDoListViewModel>> GetTaskList()
+        public async Task<List<TaskToDoListViewModel>> GetTaskList(TaskListSearchRequest request)
         {
-            var result = await _httpClient.GetFromJsonAsync<List<TaskToDoListViewModel>>("/api/Tasks");
+            string url = $"/api/Tasks/?name={request.Name}&assigneeId={request.AssigneeId}&priority={request.Priority}";
+            var result = await _httpClient.GetFromJsonAsync<List<TaskToDoListViewModel>>(url) ;
             return result;
         }
     }
