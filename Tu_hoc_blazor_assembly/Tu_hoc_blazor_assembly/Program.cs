@@ -10,6 +10,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddBlazoredToast();
 builder.Services.AddScoped<ITaskAPIClient,TaskAPIClient>();
 builder.Services.AddScoped<IUserAPIClient,UserAPIClient>();
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7043") });
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["ConnectURL"]) });
 
 await builder.Build().RunAsync();

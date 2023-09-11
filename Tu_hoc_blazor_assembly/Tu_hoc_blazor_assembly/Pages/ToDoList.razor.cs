@@ -10,6 +10,8 @@ namespace Tu_hoc_blazor_assembly.Pages
     public partial class ToDoList
     {
         [Inject]
+        public IConfiguration Configuration { get; set; }
+        [Inject]
         public IUserAPIClient _userAPIClient { get; set; }
         [Inject] private ITaskAPIClient _taskAPIClient { get; set; }
         private List<TaskToDoListViewModel> Tasks = new List<TaskToDoListViewModel>();

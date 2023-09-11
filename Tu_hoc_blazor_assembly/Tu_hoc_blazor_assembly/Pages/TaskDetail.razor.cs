@@ -10,6 +10,8 @@ namespace Tu_hoc_blazor_assembly.Pages
         public string TaskId { get; set; }
         [Inject]
         public ITaskAPIClient TaskAPIClient { get; set; }
+        [Inject]
+        public IConfiguration Configuration { get; set; }
         public TaskToDoListViewModel TaskViewModel { get; set; } = new TaskToDoListViewModel();
         protected async override Task OnInitializedAsync()
         {

@@ -19,7 +19,7 @@ else
         </tr>
         <tr>
             <td>Date</td>
-            <td>@TaskViewModel.CreatedDate.ToString("dd/MM/yyyy")</td>
+            <td>@TaskViewModel.CreatedDate.ToString(Configuration["DateTimeFormat"])</td>
         </tr>
         <tr>
             <td>Priority</td>
