@@ -1,0 +1,25 @@
+﻿@page "/taskupdate/{TaskId}"
+@using ToDoList_ViewModel.Enums
+<h3>TaskUpdate @TaskId</h3>
+
+<EditForm Model="UpdateRequest" OnValidSubmit="UpdateButtonRequest">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="mb-3">
+        <label for="updateName" class="form-label">Name</label>
+        <InputText class="form-control" id="updateName" placeholher="Replace your name here" @bind-Value="@UpdateRequest.Name"></InputText>
+        <ValidationMessage For="() => UpdateRequest.Name"></ValidationMessage>
+    </div>
+    <div class="mb-3">
+        <label for="updatePriority" class="form-label">Priority</label>
+        <InputSelect @bind-Value="@UpdateRequest.Priority" class="form-control" id="createPriority">
+            
+            @foreach (var item in Enum.GetValues(typeof(Priority)))
+            {
+                <option value="@item">@item</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="() => UpdateRequest.Priority"></ValidationMessage>
+    </div>
+    <button class="btn btn-success" type="submit">Update</button>
+</EditForm>

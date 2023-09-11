@@ -32,10 +32,11 @@ else {
                 }
                 </InputSelect>
             </div>
-            <div class="col pt-4">
+            <div class="row pt-4">
                 <button type="submit" class="btn btn-success">Search</button>
             </div>
-            <div class="col pt-4"><a href="/createtask" class="btn btn-primary">Create</a></div>
+            <div class="row pt-4"><a href="/createtask" class="btn btn-primary">Create</a></div>
+            
         </EditForm>
     </div>
 
@@ -59,6 +60,7 @@ else {
                         Status
                     </th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -73,6 +75,7 @@ else {
                         <td>@item.CreatedDate.ToString(Configuration["DateTimeFormat"])</td>
                         <td><StatusLabel Status="@item.Status"></StatusLabel></td>
                         <td><a href="/taskdetail/@item.Id" class="btn btn-primary m-1">Detail</a></td>
+                        <td><a href="/taskupdate/@item.Id" class="btn btn-outline-info">Update</a></td>
                     </tr>
                 }
             </tbody>

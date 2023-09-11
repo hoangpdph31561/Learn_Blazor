@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿
 using ToDoList_ViewModel;
 
 namespace Tu_hoc_blazor_assembly.Service
@@ -8,5 +8,6 @@ namespace Tu_hoc_blazor_assembly.Service
         Task<List<TaskToDoListViewModel>> GetTaskList(TaskListSearchRequest request);
         Task<TaskToDoListViewModel> GetTaskById(string TaskId);
         Task<bool> CreateTask(TaskCreateRequest request);
+        Task<bool> UpdateTask(string TaskId, TaskUpdateRequest request);
     }
 }

@@ -89,13 +89,11 @@ namespace ToDoListAPI.Respository
             }
         }
 
-        public async Task Update(Guid Id, TaskModel task)
+        public async Task Update(Guid Id, TaskUpdateRequest task)
         {
             var result = await _dbContext.Tasks.FirstOrDefaultAsync(x => x.Id == Id);
             result.Name = task.Name;
-            result.Status = task.Status;
-            result.Priority = task.Priority;
-            result.CreatedDate = task.CreatedDate;
+            result.Priority = task.Priority== null? Priority.Low :(Priority) task.Priority;
             _dbContext.Tasks.Update(result);
             await _dbContext.SaveChangesAsync();
         }

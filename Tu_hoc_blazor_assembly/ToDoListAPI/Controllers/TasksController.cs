@@ -61,7 +61,7 @@ namespace ToDoListAPI.Controllers
             }
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTask(Guid id, [FromForm]TaskModel task)
+        public async Task<IActionResult> UpdateTask(Guid id, [FromBody]TaskUpdateRequest task)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace ToDoListAPI.Controllers
                 {
                     return NotFound();
                 }
-                _taskRespository.Update(id, task);
+                await _taskRespository.Update(id, task);
                 return Ok();
             }
             catch (Exception e)
@@ -89,7 +89,7 @@ namespace ToDoListAPI.Controllers
                 {
                     return NotFound();
                 }
-                _taskRespository.Delete(id);
+                await _taskRespository.Delete(id);
                 return Ok();
             }
             catch (Exception e)
