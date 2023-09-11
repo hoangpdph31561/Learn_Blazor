@@ -8,37 +8,7 @@
     <div class="spinner"></div>
 }
 else {
-    <div class="row">
-        <EditForm Model="@TaskListSearch" OnSubmit="SearchForm">
-            <div class="col">
-                <label for="SearchName">Name</label>
-                <InputText id="SearchName" class="form-control" @bind-Value="TaskListSearch.Name"></InputText>
-            </div>
-            <div class="col">
-                <label for="Assignee">Assignee Name</label>
-                <InputSelect id="Assignee" @bind-Value="TaskListSearch.AssigneeId" class="form-control">
-                    @foreach (var item in Users)
-                {
-                    <option value="@item.UserId">@item.Name</option>
-                }
-                </InputSelect>
-            </div>
-            <div class="col">
-                <label for="PriorityName">Priority</label>
-                <InputSelect id="PriorityName" class="form-control" @bind-Value="TaskListSearch.Priority">
-                    @foreach (var item in Enum.GetNames(typeof(Priority)))
-                {
-                    <option value="@item">@item</option>
-                }
-                </InputSelect>
-            </div>
-            <div class="row pt-4">
-                <button type="submit" class="btn btn-success">Search</button>
-            </div>
-            <div class="row pt-4"><a href="/createtask" class="btn btn-primary">Create</a></div>
-            
-        </EditForm>
-    </div>
+   <TaskSearch Onsearch="SearchForm"></TaskSearch>
 
 <div class="row mt-4">
         <table class="table">

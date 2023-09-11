@@ -22,8 +22,9 @@ namespace Tu_hoc_blazor_assembly.Pages
             Tasks = await _taskAPIClient.GetTaskList(TaskListSearch);
             Users = await _userAPIClient.GetAllUser();
         }
-        private async Task SearchForm(EditContext context)
+        private async Task SearchForm(TaskListSearchRequest requestCallBack)
         {
+            TaskListSearch = requestCallBack;
             Tasks = await _taskAPIClient.GetTaskList(TaskListSearch);
         }
     }

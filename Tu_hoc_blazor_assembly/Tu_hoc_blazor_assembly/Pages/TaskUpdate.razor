@@ -1,6 +1,6 @@
 ﻿@page "/taskupdate/{TaskId}"
 @using ToDoList_ViewModel.Enums
-<h3>TaskUpdate @TaskId</h3>
+<PageTitle>Task @TaskId is updating</PageTitle>
 
 <EditForm Model="UpdateRequest" OnValidSubmit="UpdateButtonRequest">
     <DataAnnotationsValidator/>
