@@ -1,0 +1,41 @@
+﻿@using ToDoList_ViewModel.Enums
+
+@switch (Status)
+{
+    case Status.New :
+        <span class="badge bg-primary">@nameof(Status.New)</span>
+        break;
+    case Status.Open:
+        <span class="badge bg-secondary">@nameof(Status.Open)</span>
+        break;
+    case Status.Inprogress:
+        <span class="badge bg-success">@nameof(Status.Inprogress)</span>
+        break;
+    case Status.Resolved:
+        <span class="badge bg-dark">@nameof(Status.Resolved)</span>
+        break;
+    case Status.Done:
+        <span class="badge bg-light text-dark">@nameof(Status.Done)</span>
+        break;
+    case Status.Canceled:
+        <span class="badge bg-warning text-dark">@nameof(Status.Canceled)</span>
+        break;
+    case Status.Closed:
+        <span class="badge bg-danger">@nameof(Status.Closed)</span>
+        break;
+    
+
+}
+@code {
+    [Parameter]
+    public Status Status { get; set; }
+    /*
+        * Open,
+        New,
+        Inprogress,
+        Resolved,
+        Done,
+        Canceled,
+     Closed
+    */
+}

@@ -68,10 +68,10 @@ else {
                         <td>
                             @item.Name
                         </td>
-                        <td>@item.Priority</td>
+                        <td><PriorityLabel Priority="@item.Priority"></PriorityLabel></td>
                         <td>@item.AssigneeName</td>
                         <td>@item.CreatedDate.ToString("dd/MM/yyyy hh:mm")</td>
-                        <td>@item.Status</td>
+                        <td><StatusLabel Status="@item.Status"></StatusLabel></td>
                         <td><a href="/taskdetail/@item.Id" class="btn btn-primary m-1">Detail</a></td>
                     </tr>
                 }

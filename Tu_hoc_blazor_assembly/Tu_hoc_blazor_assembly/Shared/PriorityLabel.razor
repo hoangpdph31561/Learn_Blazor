@@ -1,0 +1,17 @@
+﻿@using ToDoList_ViewModel.Enums
+@switch (Priority)
+{
+    case Priority.Low:
+        <span class="badge rounded-pill bg-primary">@nameof(Priority.Low)</span>
+        break;
+    case Priority.Medium:
+        <span class="badge rounded-pill bg-warning text-dark">@nameof(Priority.Medium)</span>
+        break;
+    case Priority.High:
+        <span class="badge rounded-pill bg-danger">@nameof(Priority.High)</span>
+        break;
+}
+@code {
+    [Parameter]
+    public Priority Priority { get; set; }
+}
