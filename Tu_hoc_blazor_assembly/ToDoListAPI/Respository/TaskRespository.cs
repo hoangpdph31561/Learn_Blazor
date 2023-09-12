@@ -34,7 +34,7 @@ namespace ToDoListAPI.Respository
         public async Task Delete(Guid Id)
         {
             var result = await _dbContext.Tasks.FirstOrDefaultAsync(x => x.Id == Id);
-             _dbContext.Tasks.Remove(result);
+            _dbContext.Tasks.Remove(result);
             await _dbContext.SaveChangesAsync();
         }
 

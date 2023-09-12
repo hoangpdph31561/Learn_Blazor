@@ -17,6 +17,12 @@ namespace Tu_hoc_blazor_assembly.Service
             return result.IsSuccessStatusCode;
         }
 
+        public async Task<bool> DeleteTask(Guid taskId)
+        {
+            var result = await _httpClient.DeleteAsync($"/api/tasks/{taskId}");
+            return result.IsSuccessStatusCode;
+        }
+
         public async Task<TaskToDoListViewModel> GetTaskById(string TaskId)
         {
             var result = await _httpClient.GetFromJsonAsync<TaskToDoListViewModel>($"/api/Tasks/{TaskId}");

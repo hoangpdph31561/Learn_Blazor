@@ -9,5 +9,6 @@ namespace Tu_hoc_blazor_assembly.Service
         Task<TaskToDoListViewModel> GetTaskById(string TaskId);
         Task<bool> CreateTask(TaskCreateRequest request);
         Task<bool> UpdateTask(string TaskId, TaskUpdateRequest request);
+        Task<bool> DeleteTask(Guid taskId);
     }
 }

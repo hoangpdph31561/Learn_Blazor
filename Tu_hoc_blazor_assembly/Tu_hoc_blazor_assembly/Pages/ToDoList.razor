@@ -14,6 +14,7 @@ else {
         <table class="table">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>
                         Name
                     </th>
@@ -31,12 +32,14 @@ else {
                     </th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Tasks)
                 {
                     <tr>
+                        <td>@item.Id</td>
                         <td>
                             @item.Name
                         </td>
@@ -46,11 +49,17 @@ else {
                         <td><StatusLabel Status="@item.Status"></StatusLabel></td>
                         <td><a href="/taskdetail/@item.Id" class="btn btn-primary m-1">Detail</a></td>
                         <td><a href="/taskupdate/@item.Id" class="btn btn-outline-info">Update</a></td>
+                        <td><button type="button" class="btn btn-danger" @onclick="()=> OnDelete(item.Id)">Delete</button></td>
                     </tr>
                 }
             </tbody>
         </table>
 </div>
+<DeleteConfirmation @ref="DeleteConfirmation"
+    ConfirmationTitle="Delete task"
+ConfirmationChanged="OnConfirmDeleteTask"
+ConfirmationMessage="Are you sure you want to delete this task">
 
+</DeleteConfirmation>
 }
 

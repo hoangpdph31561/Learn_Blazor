@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Toast.Services;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using ToDoList_ViewModel;
 using ToDoList_ViewModel.Enums;
@@ -14,9 +15,13 @@ namespace Tu_hoc_blazor_assembly.Pages
         [Inject]
         public IUserAPIClient _userAPIClient { get; set; }
         [Inject] private ITaskAPIClient _taskAPIClient { get; set; }
+        [Inject]
+        public IToastService ToastService { get; set; }
         private List<TaskToDoListViewModel> Tasks = new List<TaskToDoListViewModel>();
+        private Guid TaskID { get; set; }
         private List<UserViewModel> Users = new List<UserViewModel>();
         private TaskListSearchRequest TaskListSearch { get; set; } = new TaskListSearchRequest();
+        private DeleteConfirmation DeleteConfirmation { get; set; }
         protected async override Task OnInitializedAsync()
         {
             Tasks = await _taskAPIClient.GetTaskList(TaskListSearch);
@@ -26,6 +31,23 @@ namespace Tu_hoc_blazor_assembly.Pages
         {
             TaskListSearch = requestCallBack;
             Tasks = await _taskAPIClient.GetTaskList(TaskListSearch);
+        }
+        public void OnDelete(Guid deleteId)
+        {
+            TaskID = deleteId;
+            DeleteConfirmation.Show();
+        }
+        public async Task OnConfirmDeleteTask(bool deleteConfirm)
+        {
+            if(deleteConfirm)
+            {
+                var result =await _taskAPIClient.DeleteTask(TaskID);
+                if(result)
+                {
+                    Tasks =await _taskAPIClient.GetTaskList(TaskListSearch);
+                    ToastService.ShowInfo("Successfully delete your task");
+                }
+            }
         }
     }
     
