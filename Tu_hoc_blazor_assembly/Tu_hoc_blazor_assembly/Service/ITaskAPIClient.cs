@@ -10,5 +10,6 @@ namespace Tu_hoc_blazor_assembly.Service
         Task<bool> CreateTask(TaskCreateRequest request);
         Task<bool> UpdateTask(string TaskId, TaskUpdateRequest request);
         Task<bool> DeleteTask(Guid taskId);
+        Task<bool> UpdateUser(Guid taskId, ChangeUserRequest request);
     }
 }

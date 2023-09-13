@@ -97,5 +97,13 @@ namespace ToDoListAPI.Respository
             _dbContext.Tasks.Update(result);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task UpdateUser(Guid TaskId, ChangeUserRequest request)
+        {
+            var result = await _dbContext.Tasks.FirstOrDefaultAsync(x => x.Id==TaskId);
+            result.AssigneeId = request.UserId;
+            _dbContext.Tasks.Update(result);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

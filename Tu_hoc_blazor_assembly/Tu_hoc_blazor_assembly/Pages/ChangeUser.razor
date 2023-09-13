@@ -1,0 +1,38 @@
+﻿@if (IsShow)
+{
+
+    <div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <EditForm Model="RequestChangeUser" OnSubmit="ConfirmChange">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Change user</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        @onclick="() => Hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <InputSelect @bind-Value="RequestChangeUser.UserId">
+                            @foreach (var item in UserView)
+                        {
+                            <option value="@item.UserId">@item.Name</option>
+                        }
+                        </InputSelect>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        @onclick="() => Hide()">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-danger"
+                        >
+                            Change User
+                        </button>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+
+}

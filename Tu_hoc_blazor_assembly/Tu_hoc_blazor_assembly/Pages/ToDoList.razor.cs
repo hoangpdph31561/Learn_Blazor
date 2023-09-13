@@ -18,6 +18,7 @@ namespace Tu_hoc_blazor_assembly.Pages
         [Inject]
         public IToastService ToastService { get; set; }
         private List<TaskToDoListViewModel> Tasks = new List<TaskToDoListViewModel>();
+        private ChangeUser ChangeUser { get; set; }
         private Guid TaskID { get; set; }
         private List<UserViewModel> Users = new List<UserViewModel>();
         private TaskListSearchRequest TaskListSearch { get; set; } = new TaskListSearchRequest();
@@ -47,6 +48,17 @@ namespace Tu_hoc_blazor_assembly.Pages
                     Tasks =await _taskAPIClient.GetTaskList(TaskListSearch);
                     ToastService.ShowInfo("Successfully delete your task");
                 }
+            }
+        }
+        private void ShowUserChange(Guid id)
+        {
+            ChangeUser.Show(id);
+        }
+        public async Task OnConfirmationChangeUser(bool isConfirm)
+        {
+            if(isConfirm)
+            {
+                Tasks = await _taskAPIClient.GetTaskList(TaskListSearch);
             }
         }
     }

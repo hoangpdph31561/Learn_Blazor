@@ -11,5 +11,6 @@ namespace ToDoListAPI.Respository
         Task<ToDoListAPI.Entities.TaskCV> CreateNewTask(TaskModel request);
         Task Update(Guid Id, TaskUpdateRequest task);
         Task Delete(Guid Id);
+        Task UpdateUser(Guid TaskId, ChangeUserRequest request);
     }
 }

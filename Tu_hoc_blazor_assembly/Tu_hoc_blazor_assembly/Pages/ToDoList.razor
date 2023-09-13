@@ -44,7 +44,7 @@ else {
                             @item.Name
                         </td>
                         <td><PriorityLabel Priority="@item.Priority"></PriorityLabel></td>
-                        <td>@item.AssigneeName</td>
+                        <td><a @onclick="() => ShowUserChange(item.Id)" style="text-decoration: underline;cursor: pointer;">@item.AssigneeName</a></td>
                         <td>@item.CreatedDate.ToString(Configuration["DateTimeFormat"])</td>
                         <td><StatusLabel Status="@item.Status"></StatusLabel></td>
                         <td><a href="/taskdetail/@item.Id" class="btn btn-primary m-1">Detail</a></td>
@@ -61,5 +61,8 @@ ConfirmationChanged="OnConfirmDeleteTask"
 ConfirmationMessage="Are you sure you want to delete this task">
 
 </DeleteConfirmation>
+<ChangeUser @ref="ChangeUser" ChangeUserEvent="OnConfirmationChangeUser">
+
+</ChangeUser>
 }
 

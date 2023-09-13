@@ -98,5 +98,24 @@ namespace ToDoListAPI.Controllers
                 return BadRequest(e);
             }
         }
+        [HttpPut("{id}/updateuser")]
+        public async Task<IActionResult> UpdateUser(Guid id,[FromBody] ChangeUserRequest request)
+        {
+            try
+            {
+                var result = await _taskRespository.GetTaskByID(id);
+                if(result == null)
+                {
+                    return NotFound("unable to find");
+                }
+                await _taskRespository.UpdateUser(id, request);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

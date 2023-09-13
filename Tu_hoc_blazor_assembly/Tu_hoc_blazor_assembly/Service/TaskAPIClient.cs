@@ -41,5 +41,11 @@ namespace Tu_hoc_blazor_assembly.Service
             var result = await _httpClient.PutAsJsonAsync($"/api/Tasks/{TaskId}", request);
             return result.IsSuccessStatusCode;
         }
+
+        public async Task<bool> UpdateUser(Guid taskId, ChangeUserRequest request)
+        {
+            var result = await _httpClient.PutAsJsonAsync($"/api/Tasks/{taskId}/updateuser",request);
+            return result.IsSuccessStatusCode;
+        }
     }
 }
