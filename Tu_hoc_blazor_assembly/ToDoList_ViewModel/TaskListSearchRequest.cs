@@ -7,7 +7,8 @@ using ToDoList_ViewModel.Enums;
 
 namespace ToDoList_ViewModel
 {
-    public class TaskListSearchRequest
+    //Kế thừa Paging tránh lặp code vì nhiều nơi cần hiển thị list
+    public class TaskListSearchRequest : PagingParameter
     {
         public string? Name { get; set; }
         public Guid? AssigneeId { get; set; }

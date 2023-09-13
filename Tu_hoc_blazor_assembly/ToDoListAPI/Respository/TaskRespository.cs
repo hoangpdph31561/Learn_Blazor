@@ -38,7 +38,7 @@ namespace ToDoListAPI.Respository
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<TaskToDoListViewModel>> GetAllTask(TaskListSearchRequest request)
+        public async Task<PageList<TaskToDoListViewModel>> GetAllTask(TaskListSearchRequest request)
         {
             var querry = _dbContext.Tasks.Include(x => x.Assignee).AsQueryable();
             if (!string.IsNullOrEmpty(request.Name))
@@ -54,16 +54,19 @@ namespace ToDoListAPI.Respository
                 querry = querry.Where(x => x.Priority == request.Priority.Value);
 
             }
-            return await querry.Select(x => new TaskToDoListViewModel
+            //lấy ra tổng số bản ghi 
+            var count = await querry.CountAsync();
+            var data = await querry.OrderBy(x => x.CreatedDate).Skip((request.PageNumber - 1)* request.Pagesize).Take(request.Pagesize).Select(x => new TaskToDoListViewModel
             {
                 Id = x.Id,
                 Name = x.Name,
-                AssigneeId = x.AssigneeId,
-                Priority = x.Priority,
-                AssigneeName = x.Assignee.FirstName + " " + x.Assignee.LastName,
                 CreatedDate = x.CreatedDate,
+                AssigneeId = x.AssigneeId,
+                AssigneeName = x.Assignee.FirstName + " " + x.Assignee.LastName,
                 Status = x.Status,
+                Priority = x.Priority,
             }).ToListAsync();
+            return new PageList<TaskToDoListViewModel>(data,count,request.PageNumber,request.Pagesize);
         }
 
         public async Task<TaskToDoListViewModel> GetTaskByID(Guid Id)

@@ -13,7 +13,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <InputSelect @bind-Value="RequestChangeUser.UserId">
+                        <InputSelect @bind-Value="RequestChangeUser.UserId" class="form-control">
                             @foreach (var item in UserView)
                         {
                             <option value="@item.UserId">@item.Name</option>

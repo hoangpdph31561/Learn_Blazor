@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using Microsoft.AspNetCore.WebUtilities;
+using System.Net.Http.Json;
 using ToDoList_ViewModel;
 
 namespace Tu_hoc_blazor_assembly.Service
@@ -29,10 +30,29 @@ namespace Tu_hoc_blazor_assembly.Service
             return result;
         }
 
-        public async Task<List<TaskToDoListViewModel>> GetTaskList(TaskListSearchRequest request)
+        public async Task<PageList<TaskToDoListViewModel>> GetTaskList(TaskListSearchRequest request)
         {
-            string url = $"/api/Tasks/?name={request.Name}&assigneeId={request.AssigneeId}&priority={request.Priority}";
-            var result = await _httpClient.GetFromJsonAsync<List<TaskToDoListViewModel>>(url) ;
+            //string url = $"/api/Tasks/?name={request.Name}&assigneeId={request.AssigneeId}&priority={request.Priority}";
+            var queryStringParam = new Dictionary<string, string>()
+            {
+                ["pageNumber"] = request.PageNumber.ToString(),
+
+            };
+            if (!string.IsNullOrEmpty(request.Name))
+            {
+                queryStringParam.Add("name", request.Name);
+            }
+            if (request.AssigneeId.HasValue)
+            {
+                queryStringParam.Add("assigneeId", request.AssigneeId.ToString());
+            }
+            if(request.Priority.HasValue)
+            {
+                queryStringParam.Add("priority",request.Priority.ToString());
+                
+            }
+            string url = QueryHelpers.AddQueryString("/api/Tasks", queryStringParam);
+            var result = await _httpClient.GetFromJsonAsync<PageList<TaskToDoListViewModel>>(url);
             return result;
         }
 
@@ -44,7 +64,7 @@ namespace Tu_hoc_blazor_assembly.Service
 
         public async Task<bool> UpdateUser(Guid taskId, ChangeUserRequest request)
         {
-            var result = await _httpClient.PutAsJsonAsync($"/api/Tasks/{taskId}/updateuser",request);
+            var result = await _httpClient.PutAsJsonAsync($"/api/Tasks/{taskId}/updateuser", request);
             return result.IsSuccessStatusCode;
         }
     }

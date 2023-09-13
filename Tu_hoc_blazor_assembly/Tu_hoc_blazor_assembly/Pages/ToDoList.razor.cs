@@ -23,15 +23,16 @@ namespace Tu_hoc_blazor_assembly.Pages
         private List<UserViewModel> Users = new List<UserViewModel>();
         private TaskListSearchRequest TaskListSearch { get; set; } = new TaskListSearchRequest();
         private DeleteConfirmation DeleteConfirmation { get; set; }
+        private MetaData MetaData { get; set; } = new MetaData();
         protected async override Task OnInitializedAsync()
         {
-            Tasks = await _taskAPIClient.GetTaskList(TaskListSearch);
+            await GetTask();
             Users = await _userAPIClient.GetAllUser();
         }
         private async Task SearchForm(TaskListSearchRequest requestCallBack)
         {
             TaskListSearch = requestCallBack;
-            Tasks = await _taskAPIClient.GetTaskList(TaskListSearch);
+            await GetTask();
         }
         public void OnDelete(Guid deleteId)
         {
@@ -45,7 +46,7 @@ namespace Tu_hoc_blazor_assembly.Pages
                 var result =await _taskAPIClient.DeleteTask(TaskID);
                 if(result)
                 {
-                    Tasks =await _taskAPIClient.GetTaskList(TaskListSearch);
+                    await GetTask();
                     ToastService.ShowInfo("Successfully delete your task");
                 }
             }
@@ -58,8 +59,19 @@ namespace Tu_hoc_blazor_assembly.Pages
         {
             if(isConfirm)
             {
-                Tasks = await _taskAPIClient.GetTaskList(TaskListSearch);
+                await GetTask();
             }
+        }
+        private async Task GetTask()
+        {
+            var pagingRespone = await _taskAPIClient.GetTaskList(TaskListSearch);
+            Tasks = pagingRespone.Items;
+            MetaData = pagingRespone.MetaData;
+        }
+        private async Task PageChoose(int page)
+        {
+            TaskListSearch.PageNumber = page;
+            await GetTask();
         }
     }
     
